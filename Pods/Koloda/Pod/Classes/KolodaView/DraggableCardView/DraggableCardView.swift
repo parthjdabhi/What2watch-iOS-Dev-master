@@ -47,7 +47,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     private var animationDirectionY: CGFloat = 1.0
     private var dragBegin = false
     private var dragDistance = CGPointZero
-    private var swipePercentageMargin: CGFloat = 60.0
+    private var swipePercentageMargin: CGFloat = 0.5
     
     //MARK: Lifecycle
     init() {
@@ -288,7 +288,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
                 .map { centerDistance / $0.distanceTo(.zero) }
                 .minElement() ?? 0
             
-            print(" centerDistance : \(centerDistance) targetLine : \(targetLine) perimiterLine \(perimiterLine)")
+            //print(" centerDistance : \(centerDistance) targetLine : \(targetLine) perimiterLine \(perimiterLine)")
             // check 4 borders for intersection with line between touchpoint and center of card
             // return smallest percentage of distance to edge point or 0
             return rect.perimeterLines
