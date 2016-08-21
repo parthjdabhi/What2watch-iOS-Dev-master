@@ -1090,7 +1090,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1111,7 +1111,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2001,6 +2001,20 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzW-JC-GTA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" background="Sign-up-page-new-1_0001s_0002s_0000_txt-input-copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="zcy-J5-dhW">
+                                        <rect key="frame" x="61" y="344" width="253" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="AXV-mV-8Hz"/>
+                                            <constraint firstAttribute="width" constant="253" id="daU-08-RnD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="didEnterPassword:" destination="2eF-cb-2nE" eventType="editingDidEnd" id="Grb-f0-JIP"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sign up text.png" translatesAutoresizingMaskIntoConstraints="NO" id="5DE-O8-bxj">
@@ -2025,18 +2039,6 @@
                                     <action selector="backButton:" destination="2eF-cb-2nE" eventType="touchUpInside" id="eHC-bU-jd1"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" background="Sign-up-page-new-1_0001s_0002s_0000_txt-input-copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="zcy-J5-dhW">
-                                <rect key="frame" x="61" y="344" width="253" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="AXV-mV-8Hz"/>
-                                    <constraint firstAttribute="width" constant="253" id="daU-08-RnD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <connections>
-                                    <action selector="didEnterPassword:" destination="2eF-cb-2nE" eventType="editingDidEnd" id="Grb-f0-JIP"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7N-7o-9rn">
                                 <rect key="frame" x="180" y="327" width="15" height="14"/>
                                 <constraints>
@@ -2055,7 +2057,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="didEnterEmail:" destination="2eF-cb-2nE" eventType="editingDidEnd" id="ihb-BS-9dJ"/>
                                 </connections>
@@ -2064,7 +2066,6 @@
                         <constraints>
                             <constraint firstItem="PzW-JC-GTA" firstAttribute="leading" secondItem="zWe-za-x2K" secondAttribute="leading" id="0NI-JJ-syd"/>
                             <constraint firstItem="cnL-ZE-hIE" firstAttribute="top" secondItem="zWe-za-x2K" secondAttribute="top" id="12J-TF-JpZ"/>
-                            <constraint firstItem="zcy-J5-dhW" firstAttribute="centerX" secondItem="zWe-za-x2K" secondAttribute="centerX" id="2gw-nw-U5N"/>
                             <constraint firstItem="J7N-7o-9rn" firstAttribute="centerY" secondItem="PzW-JC-GTA" secondAttribute="centerY" id="4aE-6T-ssj"/>
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="leading" secondItem="zWe-za-x2K" secondAttribute="leadingMargin" constant="12" id="8wn-PE-lPp"/>
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="leading" secondItem="zWe-za-x2K" secondAttribute="leadingMargin" id="CK0-92-INg"/>
@@ -2073,11 +2074,9 @@
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="top" secondItem="5DE-O8-bxj" secondAttribute="top" id="IpT-0F-B80"/>
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="centerY" secondItem="5DE-O8-bxj" secondAttribute="centerY" id="JS5-Ro-nZv"/>
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="top" secondItem="8XP-dx-OuK" secondAttribute="bottom" constant="28" id="KUL-Ri-4pG"/>
-                            <constraint firstItem="zcy-J5-dhW" firstAttribute="top" secondItem="J7N-7o-9rn" secondAttribute="bottom" constant="3" id="PPw-0f-Wb1"/>
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="top" secondItem="8XP-dx-OuK" secondAttribute="bottom" constant="8" id="X2H-h8-xc7"/>
                             <constraint firstItem="k1m-PR-eT5" firstAttribute="top" secondItem="PzW-JC-GTA" secondAttribute="bottom" id="XaM-I3-6Jx"/>
                             <constraint firstAttribute="trailing" secondItem="PzW-JC-GTA" secondAttribute="trailing" id="XaQ-VO-ElR"/>
-                            <constraint firstItem="zcy-J5-dhW" firstAttribute="top" secondItem="mgp-5z-uoe" secondAttribute="bottom" constant="18" id="YBs-RK-COn"/>
                             <constraint firstItem="5DE-O8-bxj" firstAttribute="centerX" secondItem="zWe-za-x2K" secondAttribute="centerX" id="cE7-AO-WaE"/>
                             <constraint firstItem="5DE-O8-bxj" firstAttribute="top" secondItem="8XP-dx-OuK" secondAttribute="bottom" constant="16" id="cgW-ih-RyQ"/>
                             <constraint firstItem="cnL-ZE-hIE" firstAttribute="leading" secondItem="zWe-za-x2K" secondAttribute="leading" id="eE0-J2-b2x"/>
@@ -2134,7 +2133,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         <connections>
                                             <action selector="firstNameEntry:" destination="tBc-3N-ozv" eventType="editingDidEnd" id="5ev-k4-mQ2"/>
                                         </connections>
@@ -2182,7 +2181,7 @@
                                     <constraint firstAttribute="height" constant="50" id="pfp-LF-ejC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="lastNameEntry:" destination="tBc-3N-ozv" eventType="editingDidEnd" id="huc-T0-GkI"/>
                                 </connections>
@@ -2445,8 +2444,11 @@
                                 </variation>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6pl-jH-0h6">
-                                <rect key="frame" x="0.0" y="399" width="375" height="208"/>
+                                <rect key="frame" x="0.0" y="409" width="375" height="208"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="208" id="tGg-Na-oUt"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BMc-eb-etT" customClass="PDCarouselFlowLayout" customModule="What2Watch" customModuleProvider="target">
                                     <size key="itemSize" width="172" height="208"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2521,12 +2523,11 @@
                             <constraint firstItem="Re2-8W-v1u" firstAttribute="centerX" secondItem="LJf-GH-Xbl" secondAttribute="centerX" id="E6Y-3o-OnE"/>
                             <constraint firstItem="6pl-jH-0h6" firstAttribute="trailing" secondItem="5yM-jJ-G7p" secondAttribute="trailing" id="Hid-9l-sWg"/>
                             <constraint firstAttribute="trailing" secondItem="5yM-jJ-G7p" secondAttribute="trailing" id="QIN-E9-GdY"/>
+                            <constraint firstItem="vQw-jj-Euk" firstAttribute="top" secondItem="6pl-jH-0h6" secondAttribute="bottom" constant="50" id="TEp-lQ-zXm"/>
                             <constraint firstItem="0Mu-vG-PV8" firstAttribute="top" secondItem="ZKF-ii-mMg" secondAttribute="bottom" constant="76" id="YEY-6c-GBG"/>
                             <constraint firstItem="0Mu-vG-PV8" firstAttribute="width" secondItem="LJf-GH-Xbl" secondAttribute="height" multiplier="200:667" id="nlt-Bf-6JL"/>
                             <constraint firstItem="5yM-jJ-G7p" firstAttribute="leading" secondItem="LJf-GH-Xbl" secondAttribute="leading" id="ob2-BL-jzC"/>
-                            <constraint firstItem="6pl-jH-0h6" firstAttribute="top" secondItem="Re2-8W-v1u" secondAttribute="bottom" constant="53" id="pCJ-v5-Pvb"/>
                             <constraint firstItem="Re2-8W-v1u" firstAttribute="top" secondItem="0Mu-vG-PV8" secondAttribute="bottom" constant="8" id="sFU-Q6-llF"/>
-                            <constraint firstItem="vQw-jj-Euk" firstAttribute="top" secondItem="6pl-jH-0h6" secondAttribute="bottom" constant="60" id="yV5-bd-hkl"/>
                             <constraint firstItem="Re2-8W-v1u" firstAttribute="centerX" secondItem="0Mu-vG-PV8" secondAttribute="centerX" id="ygv-uz-AOQ"/>
                             <constraint firstItem="0Mu-vG-PV8" firstAttribute="centerX" secondItem="LJf-GH-Xbl" secondAttribute="centerX" id="yiO-cc-3xb"/>
                         </constraints>
@@ -3118,8 +3119,8 @@
         <image name="yellowbox.png" width="749" height="136"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xCO-Ir-LDj"/>
-        <segue reference="x2J-qa-3VA"/>
         <segue reference="XHP-zg-Q8T"/>
+        <segue reference="x2J-qa-3VA"/>
+        <segue reference="kM5-IA-WxT"/>
     </inferredMetricsTieBreakers>
 </document>

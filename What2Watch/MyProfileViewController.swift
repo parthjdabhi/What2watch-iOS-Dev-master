@@ -36,7 +36,7 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.layoutIfNeeded()
+        self.imgProfile.layoutIfNeeded()
         
         // Do any additional setup after loading the view.
         
