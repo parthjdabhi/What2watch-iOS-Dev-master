@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "What2Watch/MyProfileViewController.swift"
-            timestampString = "493446865.069887"
+            timestampString = "493473647.626606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "MyProfileViewController"
             landmarkType = "3">
          </BreakpointContent>

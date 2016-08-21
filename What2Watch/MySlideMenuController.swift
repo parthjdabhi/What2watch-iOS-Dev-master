@@ -48,9 +48,14 @@ class MySlideMenuController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.layoutIfNeeded()
         
         txtSearchbar?.layer.cornerRadius = (txtSearchbar?.frame.size.height)!/2
         txtSearchbar?.layer.masksToBounds = true
+        
+        let paddingView : UIView = UIView(frame: CGRectMake(0, 0, 16, 20))
+        txtSearchbar?.leftView = paddingView
+        txtSearchbar?.leftViewMode = UITextFieldViewMode.Always
         
         lblCount?.layer.cornerRadius = (lblCount?.frame.size.height)!/2
         lblCount?.layer.borderColor = lblCount!.textColor.CGColor
@@ -68,9 +73,33 @@ class MySlideMenuController : UIViewController {
         btnLogout.layer.borderWidth = 1
         btnLogout.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.2).CGColor
         
-        let ref = FIRDatabase.database().reference()
-        let userID = FIRAuth.auth()?.currentUser?.uid
+        RefreshProfiledata()
         
+        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //        let watchlistVC = storyboard.instantiateViewControllerWithIdentifier("TermsViewController") as! TermsViewController
+        //        self.watchlistVC = UINavigationController(rootViewController: watchlistVC)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.imgProfile?.image = AppState.sharedInstance.myProfile ?? UIImage(named: "user.png")
+        RefreshWatchllistCount()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent;
+    }
+    
+    func RefreshProfiledata()
+    {
+        //let ref = FIRDatabase.database().reference()
+        let userID = FIRAuth.auth()?.currentUser?.uid
         ref.child("users").child(userID!).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if snapshot.exists() {
                 AppState.sharedInstance.currentUser = snapshot
@@ -100,23 +129,6 @@ class MySlideMenuController : UIViewController {
                 }
             }
         })
-        
-        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        //        let watchlistVC = storyboard.instantiateViewControllerWithIdentifier("TermsViewController") as! TermsViewController
-        //        self.watchlistVC = UINavigationController(rootViewController: watchlistVC)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        RefreshWatchllistCount()
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent;
     }
     
     func RefreshWatchllistCount() {

@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDatabase
 
-class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource , UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     @IBOutlet var btnMenu: UIButton?
     @IBOutlet var imgProfile: UIImageView!
@@ -32,9 +32,11 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     var ref = FIRDatabase.database().reference()
+    var imagePickerController: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.layoutIfNeeded()
         
         // Do any additional setup after loading the view.
         
@@ -62,6 +64,11 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
         lblDisplayName.text = AppState.sharedInstance.displayName
         imgProfile.image = AppState.sharedInstance.myProfile ?? UIImage(named: "user.png")
         
+        let imgTapGesture = UITapGestureRecognizer(target: self, action: #selector(MyProfileViewController.onTapProfilePic(_:)) )
+        imgTapGesture.numberOfTouchesRequired = 1
+        imgTapGesture.cancelsTouchesInView = true
+        imgProfile.addGestureRecognizer(imgTapGesture)
+        
         self.fetchMovieWatched()
     }
     
@@ -87,6 +94,87 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
      // Pass the selected object to the new view controller.
      }
      */
+    
+    /**
+     Custom functions
+     */
+    
+    func onTapProfilePic(sender: UILongPressGestureRecognizer? = nil) {
+        // 1
+        view.endEditing(true)
+        
+        // 2
+        let imagePickerActionSheet = UIAlertController(title: "Snap/Upload Photo",
+                                                       message: nil, preferredStyle: .ActionSheet)
+        
+        let libraryButton = UIAlertAction(title: "Choose Existing",
+                                          style: .Default) { (alert) -> Void in
+                                            self.imagePickerController = UIImagePickerController()
+                                            self.imagePickerController.delegate = self
+                                            self.imagePickerController.sourceType = .PhotoLibrary
+                                            self.presentViewController(self.imagePickerController,
+                                                                       animated: true,
+                                                                       completion: nil)
+        }
+        imagePickerActionSheet.addAction(libraryButton)
+        // 5
+        let cancelButton = UIAlertAction(title: "Cancel",
+                                         style: .Cancel) { (alert) -> Void in
+        }
+        imagePickerActionSheet.addAction(cancelButton)
+        // 6
+        presentViewController(imagePickerActionSheet, animated: true,
+                              completion: nil)
+    }
+    
+    func scaleImage(image: UIImage, maxDimension: CGFloat) -> UIImage {
+        
+        var scaledSize = CGSizeMake(maxDimension, maxDimension)
+        var scaleFactor:CGFloat
+        
+        if image.size.width > image.size.height {
+            scaleFactor = image.size.height / image.size.width
+            scaledSize.width = maxDimension
+            scaledSize.height = scaledSize.width * scaleFactor
+        } else {
+            scaleFactor = image.size.width / image.size.height
+            scaledSize.height = maxDimension
+            scaledSize.width = scaledSize.height * scaleFactor
+        }
+        
+        UIGraphicsBeginImageContext(scaledSize)
+        image.drawInRect(CGRectMake(0, 0, scaledSize.width, scaledSize.height))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledImage
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            imgProfile.image = scaleImage(pickedImage, maxDimension: 300)
+            AppState.sharedInstance.myProfile = imgProfile.image
+            
+            let base64String = self.imgToBase64(imgProfile.image!)
+            let strProfile = base64String as String
+            
+            FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).setValue(strProfile, forKey: "image")
+        }
+
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController){
+        
+    }
+    
+    func imgToBase64(image: UIImage) -> String {
+        let imageData:NSData = UIImagePNGRepresentation(image)!
+        let base64String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        print(base64String)
+        
+        return base64String
+    }
     
     // MARK: - Card Collection Delegate & DataSource
     
