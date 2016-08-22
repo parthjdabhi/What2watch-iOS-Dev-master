@@ -22,13 +22,6 @@ protocol LeftMenuProtocol : class {
     func changeViewController(menu: LeftMenu)
 }
 
-let status = "status"
-let status_like = "Liked"
-let status_dislike = "Disliked"
-let status_watchlist = "Watchlist"
-let status_haventWatched = "Haven't Watched"
-
-
 class MySlideMenuController : UIViewController {
     
     @IBOutlet weak var txtSearchbar: UITextField?
@@ -83,9 +76,9 @@ class MySlideMenuController : UIViewController {
         
         RefreshProfiledata()
         
-        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        //        let watchlistVC = storyboard.instantiateViewControllerWithIdentifier("TermsViewController") as! TermsViewController
-        //        self.watchlistVC = UINavigationController(rootViewController: watchlistVC)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let watchlistVC = storyboard.instantiateViewControllerWithIdentifier("TermsViewController") as! TermsViewController
+//        self.watchlistVC = UINavigationController(rootViewController: watchlistVC)
     }
     
     override func viewWillAppear(animated: Bool) {

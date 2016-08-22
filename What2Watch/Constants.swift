@@ -24,3 +24,10 @@ struct Constants {
         static let imageUrl = "imageUrl"
     }
 }
+
+
+let status = "status"
+let status_like = "Liked"
+let status_dislike = "Disliked"
+let status_watchlist = "Watchlist"
+let status_haventWatched = "Haven't Watched"
