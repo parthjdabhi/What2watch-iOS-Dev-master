@@ -36,13 +36,14 @@ class NameViewController: BaseViewController, UITextFieldDelegate, UITextViewDel
         lastNameField.leftViewMode = UITextFieldViewMode .Always
         lastNameField.font = UIFont(name: lastNameField.font!.fontName, size: 15)
 
+        self.firstNameField.delegate = self
+        self.lastNameField.delegate = self
+        
         
         //self.saveData()
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.firstNameField.delegate = self
-        self.lastNameField.delegate = self
         
         self.background.fadeOut(completion: {
             (finished: Bool) -> Void in
@@ -56,6 +57,14 @@ class NameViewController: BaseViewController, UITextFieldDelegate, UITextViewDel
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
+        
+        if textField == firstNameField {
+            lastNameField.becomeFirstResponder()
+        } else if textField == lastNameField {
+            self.view.endEditing(true)
+            self.goNextSelectorClosure?()
+        }
+        
         return false
     }
     

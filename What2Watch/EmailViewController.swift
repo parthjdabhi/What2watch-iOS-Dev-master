@@ -36,6 +36,9 @@ class EmailViewController: BaseViewController, UITextFieldDelegate, UITextViewDe
         passwordField.leftViewMode = UITextFieldViewMode .Always
         
         passwordField.font = UIFont(name: passwordField.font!.fontName, size: 15)
+        
+        self.emailField.delegate = self
+        self.passwordField.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -53,7 +56,12 @@ class EmailViewController: BaseViewController, UITextFieldDelegate, UITextViewDe
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            self.view.endEditing(true)
+            self.goNextSelectorClosure?()
+        }
         return false
     }
     

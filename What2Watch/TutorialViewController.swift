@@ -47,12 +47,12 @@ class TutorialViewController: UIViewController {
     var currentIndex: Int? = 0
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         // The view controllers will be shown in this order
-        return [self.newColoredViewController("Picture"),
-                self.newColoredViewController("Red"),
-                self.newColoredViewController("Blue"),
-                self.newColoredViewController("DOB"),
-                self.newColoredViewController("Nationality"),
-                self.newColoredViewController("Terms")]
+        return [self.newColoredViewController("Picture",prevIndex: 0,nextIndex: 1),
+                self.newColoredViewController("Red",prevIndex: 0,nextIndex: 2),
+                self.newColoredViewController("Blue",prevIndex: 1,nextIndex: 3),
+                self.newColoredViewController("DOB",prevIndex: 2,nextIndex: 4),
+                self.newColoredViewController("Nationality",prevIndex: 3,nextIndex: 5),
+                self.newColoredViewController("Terms",prevIndex: 4,nextIndex: 5)]
     }()
     
     func initViews() {
@@ -63,14 +63,21 @@ class TutorialViewController: UIViewController {
             (viewController as? BaseViewController)?.background.frame = UIScreen.mainScreen().bounds
             (viewController as? BaseViewController)?.view.layoutSubviews()
             //(viewController as? BaseViewController)?.view.layoutIfNeeded()
+            
             self.scrollView.addSubview(viewController.view)
         }
     }
     
-    private func newColoredViewController(color: String) -> UIViewController {
+    private func newColoredViewController(color: String, prevIndex:Int, nextIndex:Int) -> UIViewController {
         let VC = UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewControllerWithIdentifier("\(color)ViewController") as! BaseViewController
         VC.delegate = self
+        VC.goNextSelectorClosure = {
+            
+            print("goNextSelectorClosure called")
+            self.scrollView.setContentOffset(CGPointMake(CGFloat(UIScreen.mainScreen().bounds.width * CGFloat(nextIndex)), 0), animated: true)
+//            [scrollView scrollRectToVisible:CGRectMake(scrollView. *pageNumber, 0, 320 , 240) animated:NO];
+        }
         return VC
     }
 
@@ -86,6 +93,11 @@ class TutorialViewController: UIViewController {
     func didChangePageControlValue() {
 //        tutorialPageViewController?.scrollToViewController(index: pageControl.currentPage)
     }
+    
+    func goPage(page:Int) {
+        print("Go to \(page) page")
+    }
+    
 }
 
 extension TutorialViewController: TutorialPageViewControllerDelegate {

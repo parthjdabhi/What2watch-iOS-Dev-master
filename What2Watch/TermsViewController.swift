@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import SWRevealViewController
 
 class TermsViewController: BaseViewController, UIPageViewControllerDelegate {
 
@@ -100,7 +101,10 @@ class TermsViewController: BaseViewController, UIPageViewControllerDelegate {
                     self.ref.child("users").child(user!.uid).child("image").setValue(userPicture)
                     CommonUtils.sharedUtils.hideProgress()
                     
-                    self.performSegueWithIdentifier("segueMainScreen", sender: self)
+                    let RevealViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as! SWRevealViewController
+                    self.navigationController?.pushViewController(RevealViewController, animated: true)
+                    
+                    //self.performSegueWithIdentifier("segueMainScreen", sender: self)
                     
                     //let mainViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainScreenViewController") as! MainScreenViewController!
                     //self.navigationController?.pushViewController(mainViewController, animated: true)

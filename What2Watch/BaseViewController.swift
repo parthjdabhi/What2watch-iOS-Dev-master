@@ -17,6 +17,9 @@ class BaseViewController: UIViewController {
     @IBOutlet var background: UIView!
     var delegate: BaseViewControllerDelegate!
     
+    var goNextSelectorClosure: Optional<() -> ()> = nil
+    var goPrevSelectorClosure: Optional<() -> ()> = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

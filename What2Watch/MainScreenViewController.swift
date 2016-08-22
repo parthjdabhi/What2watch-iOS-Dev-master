@@ -304,19 +304,19 @@ extension MainScreenViewController: KolodaViewDelegate {
         switch direction {
         case .Left, .TopLeft, .BottomLeft:
             print("Liked")
-            SaveSwipeEntry(Int(index), Status: "Liked")
+            SaveSwipeEntry(Int(index), Status: status_like)
             break
         case .Right, .TopRight, .BottomRight:
             print("Disliked")
-            SaveSwipeEntry(Int(index), Status: "Disliked")
+            SaveSwipeEntry(Int(index), Status: status_dislike)
             break
         case .Up:
             print("Haven't Watched")
-            SaveSwipeEntry(Int(index), Status: "Haven't Watched")
+            SaveSwipeEntry(Int(index), Status: status_haventWatched)
             break
         case .Down:
             print("Watchlist")
-            SaveSwipeEntry(Int(index), Status: "Watchlist")
+            SaveSwipeEntry(Int(index), Status: status_watchlist)
             break
         }
     }

@@ -22,6 +22,13 @@ protocol LeftMenuProtocol : class {
     func changeViewController(menu: LeftMenu)
 }
 
+let status = "status"
+let status_like = "Liked"
+let status_dislike = "Disliked"
+let status_watchlist = "Watchlist"
+let status_haventWatched = "Haven't Watched"
+
+
 class MySlideMenuController : UIViewController {
     
     @IBOutlet weak var txtSearchbar: UITextField?
@@ -41,6 +48,7 @@ class MySlideMenuController : UIViewController {
     @IBOutlet weak var btnLogout: UIButton!
     
     var ref = FIRDatabase.database().reference()
+    private var movieSwiped:Array<[String:AnyObject]> = []
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -89,7 +97,7 @@ class MySlideMenuController : UIViewController {
         super.viewDidAppear(animated)
         
         self.imgProfile?.image = AppState.sharedInstance.myProfile ?? UIImage(named: "user.png")
-        RefreshWatchllistCount()
+        RefreshMovieCount()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -131,26 +139,87 @@ class MySlideMenuController : UIViewController {
         })
     }
     
-    func RefreshWatchllistCount() {
-        ref.child("swiped").child(AppState.MyUserID())
-            .queryOrderedByChild("status")
-            .queryEqualToValue("Watchlist")
-            .observeSingleEventOfType(.Value, withBlock: { snapshot in
-                if snapshot.exists() && snapshot.childrenCount > 0 {
-                    print(snapshot.childrenCount)
-                    self.lblCount?.text = "\(snapshot.childrenCount)"
-                    self.lblCount?.hidden = false
-                } else {
-                    // Not found any movie
-                    self.lblCount?.hidden = true
+    func RefreshMovieCount() {
+        ref.child("swiped").child(AppState.MyUserID()).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            
+            CommonUtils.sharedUtils.hideProgress()
+            self.movieSwiped.removeAll()
+            
+            if snapshot.exists() {
+                
+                print(snapshot.childrenCount)
+                //let swiped = snapshot.valueInExportFormat() as? NSDictionary
+                let enumerator = snapshot.children
+                while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                    //print("rest.key =>>  \(rest.key) =>>   \(rest.value)")
+                    if var dic = rest.value as? [String:AnyObject] {
+                        dic["key"] = rest.key
+                        self.movieSwiped.append(dic)
+                    }
                 }
                 
-                }, withCancelBlock: { error in
-                    print(error.description)
-                    MBProgressHUD.hideHUDForView(self.view, animated: true)
-                    self.lblCount?.hidden = true
-            })
+                if self.movieSwiped.count > 0 {
+                    let watchedMovies = self.movieSwiped.filter({
+                        if let subid = $0[status] as? String {
+                            return subid == status_dislike || subid  == status_like
+                        } else {
+                            return false
+                        }
+                    })
+                    //print("watchedMovies : \(watchedMovies)")
+                    
+                    if watchedMovies.count > 0 {
+                        self.lblWachCount?.text = "Watched Movies :  \(watchedMovies.count)"
+                    }
+                    
+                    let watchlistMovies = self.movieSwiped.filter({
+                        if let subid = $0[status] as? String {
+                            return subid == status_watchlist
+                        } else {
+                            return false
+                        }
+                    })
+                    //print("watchlistMovies : \(watchlistMovies)")
+                    
+                    if watchlistMovies.count > 0 {
+                        self.lblCount?.text = "\(watchlistMovies.count)"
+                        self.lblCount?.hidden = false
+                    } else {
+                        // Not found any movie in watchlist
+                        self.lblCount?.hidden = true
+                    }
+                    
+                }
+            } else {
+                // Not found any movie
+            }
+            
+            }, withCancelBlock: { error in
+                print(error.description)
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+        })
     }
+    
+//    func RefreshWatchllistCount() {
+//        ref.child("swiped").child(AppState.MyUserID())
+//            .queryOrderedByChild("status")
+//            .queryEqualToValue("Watchlist")
+//            .observeSingleEventOfType(.Value, withBlock: { snapshot in
+//                if snapshot.exists() && snapshot.childrenCount > 0 {
+//                    print(snapshot.childrenCount)
+//                    self.lblCount?.text = "\(snapshot.childrenCount)"
+//                    self.lblCount?.hidden = false
+//                } else {
+//                    // Not found any movie
+//                    self.lblCount?.hidden = true
+//                }
+//                
+//                }, withCancelBlock: { error in
+//                    print(error.description)
+//                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+//                    self.lblCount?.hidden = true
+//            })
+//    }
     
     @IBAction func actionMainScreen(sender: AnyObject) {
         self.performSegueWithIdentifier("segueMainScreen", sender: self)

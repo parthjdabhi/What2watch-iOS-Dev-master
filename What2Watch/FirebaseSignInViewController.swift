@@ -13,7 +13,7 @@ import FBSDKShareKit
 //import Twitter
 //import TwitterKit
 //import Fabric
-
+import SWRevealViewController
 
 extension UIColor {
     convenience init(rgb: UInt) {
@@ -181,7 +181,12 @@ class FirebaseSignInViewController: UIViewController, UITextFieldDelegate {
                                         }
                                     }
                                 }
-                                self.performSegueWithIdentifier("segueSetMenu", sender: self)
+                                let RevealViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as! SWRevealViewController
+                                self.navigationController?.pushViewController(RevealViewController, animated: true)
+                                
+                                //self.performSegueWithIdentifier("segueSetMenu", sender: self)
+                                //self.performSegueWithIdentifier("segueMainScreen", sender: self)
+                                
 //                                let mainScreenViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainScreenViewController") as! MainScreenViewController!
 //                                self.navigationController?.pushViewController(mainScreenViewController, animated: true)
                             }

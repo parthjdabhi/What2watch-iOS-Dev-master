@@ -51,11 +51,6 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
         layout.spacingMode = PDCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 100)
         layout.scrollDirection = .Horizontal
         
-        if currentPage > 0 {
-            let indexPath = NSIndexPath(forItem: currentPage, inSection: 0)
-            self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
-        }
-        
         imgProfile.layer.cornerRadius = max(imgProfile.frame.size.width, imgProfile.frame.size.height) / 2
         imgProfile.layer.borderWidth = 3
         imgProfile.layer.masksToBounds = true
@@ -70,6 +65,16 @@ class MyProfileViewController: UIViewController, UICollectionViewDelegate, UICol
         imgProfile.addGestureRecognizer(imgTapGesture)
         
         self.fetchMovieWatched()
+    }
+    override func viewWillAppear(animated: Bool) {
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if currentPage > 0 {
+            let indexPath = NSIndexPath(forItem: currentPage, inSection: 0)
+            self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {

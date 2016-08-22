@@ -363,6 +363,15 @@
 			path = "Menu Icons";
 			sourceTree = "<group>";
 		};
+		5E07A9A21D6AD9FF00E4E197 /* unused */ = {
+			isa = PBXGroup;
+			children = (
+				DAA481CE1D4A6CF900CD962B /* SignUpViewController.swift */,
+				DAA481C91D4A6BF400CD962B /* TutorialPageViewController.swift */,
+			);
+			name = unused;
+			sourceTree = "<group>";
+		};
 		5ECD0FFA1D66D59700EC54A8 /* Movie Swiping */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,16 +498,15 @@
 			isa = PBXGroup;
 			children = (
 				DA21C45C1D39458100E6843E /* FirebaseSignInViewController.swift */,
-				DAA481CE1D4A6CF900CD962B /* SignUpViewController.swift */,
 				DAA481C81D4A6BF400CD962B /* TutorialViewController.swift */,
 				97F794161D50C5A500738916 /* BaseViewController.swift */,
-				DAA481C91D4A6BF400CD962B /* TutorialPageViewController.swift */,
 				DAA481D61D4A848900CD962B /* ProfilePictureViewController.swift */,
 				DAA481DA1D4A8F5300CD962B /* EmailViewController.swift */,
 				DAA481DE1D4AA34800CD962B /* DOBViewController.swift */,
 				DAA481DC1D4A94E600CD962B /* NameViewController.swift */,
 				DAA481E01D4AE5FF00CD962B /* GenderViewController.swift */,
 				DA4A56D81D4B24D000C3E402 /* TermsViewController.swift */,
+				5E07A9A21D6AD9FF00E4E197 /* unused */,
 			);
 			name = Login/Signup;
 			sourceTree = "<group>";

@@ -1251,7 +1251,9 @@
                         <outlet property="facebook" destination="3H7-Cn-2kz" id="jfD-Wj-l2N"/>
                         <outlet property="login" destination="tLz-PW-vE2" id="jTg-sC-oev"/>
                         <outlet property="passwordField" destination="axg-0d-4hm" id="Ne0-P2-1Uq"/>
-                        <segue destination="ugq-D9-u7P" kind="custom" customClass="SWRevealViewControllerSegueSetController" id="kM5-IA-WxT"/>
+                        <segue destination="ugq-D9-u7P" kind="custom" identifier="" customClass="SWRevealViewControllerSegueSetController" id="kM5-IA-WxT"/>
+                        <segue destination="nrJ-hU-xvf" kind="show" identifier="" id="6Ci-qd-Jzv"/>
+                        <segue destination="Yh5-VM-GF8" kind="show" identifier="segueMainScreen" id="71B-JR-gtI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ivt-ZS-oc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2002,20 +2004,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzW-JC-GTA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" background="Sign-up-page-new-1_0001s_0002s_0000_txt-input-copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="zcy-J5-dhW">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" background="Sign-up-page-new-1_0001s_0002s_0000_txt-input-copy.png" translatesAutoresizingMaskIntoConstraints="NO" id="zcy-J5-dhW">
                                         <rect key="frame" x="61" y="344" width="253" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="AXV-mV-8Hz"/>
                                             <constraint firstAttribute="width" constant="253" id="daU-08-RnD"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                         <connections>
                                             <action selector="didEnterPassword:" destination="2eF-cb-2nE" eventType="editingDidEnd" id="Grb-f0-JIP"/>
                                         </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="zcy-J5-dhW" firstAttribute="centerX" secondItem="PzW-JC-GTA" secondAttribute="centerX" id="gfN-2z-OD2"/>
+                                </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sign up text.png" translatesAutoresizingMaskIntoConstraints="NO" id="5DE-O8-bxj">
                                 <rect key="frame" x="152" y="36" width="71" height="18"/>
@@ -2057,7 +2062,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                 <connections>
                                     <action selector="didEnterEmail:" destination="2eF-cb-2nE" eventType="editingDidEnd" id="ihb-BS-9dJ"/>
                                 </connections>
@@ -2066,6 +2071,7 @@
                         <constraints>
                             <constraint firstItem="PzW-JC-GTA" firstAttribute="leading" secondItem="zWe-za-x2K" secondAttribute="leading" id="0NI-JJ-syd"/>
                             <constraint firstItem="cnL-ZE-hIE" firstAttribute="top" secondItem="zWe-za-x2K" secondAttribute="top" id="12J-TF-JpZ"/>
+                            <constraint firstItem="zcy-J5-dhW" firstAttribute="top" secondItem="mgp-5z-uoe" secondAttribute="bottom" constant="18" id="2bE-EH-tdO"/>
                             <constraint firstItem="J7N-7o-9rn" firstAttribute="centerY" secondItem="PzW-JC-GTA" secondAttribute="centerY" id="4aE-6T-ssj"/>
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="leading" secondItem="zWe-za-x2K" secondAttribute="leadingMargin" constant="12" id="8wn-PE-lPp"/>
                             <constraint firstItem="AGb-wQ-pvC" firstAttribute="leading" secondItem="zWe-za-x2K" secondAttribute="leadingMargin" id="CK0-92-INg"/>
@@ -2133,7 +2139,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                         <connections>
                                             <action selector="firstNameEntry:" destination="tBc-3N-ozv" eventType="editingDidEnd" id="5ev-k4-mQ2"/>
                                         </connections>
@@ -2181,7 +2187,7 @@
                                     <constraint firstAttribute="height" constant="50" id="pfp-LF-ejC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                 <connections>
                                     <action selector="lastNameEntry:" destination="tBc-3N-ozv" eventType="editingDidEnd" id="huc-T0-GkI"/>
                                 </connections>
@@ -2444,40 +2450,40 @@
                                 </variation>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6pl-jH-0h6">
-                                <rect key="frame" x="0.0" y="409" width="375" height="208"/>
+                                <rect key="frame" x="0.0" y="386" width="375" height="208"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="208" id="tGg-Na-oUt"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BMc-eb-etT" customClass="PDCarouselFlowLayout" customModule="What2Watch" customModuleProvider="target">
-                                    <size key="itemSize" width="172" height="208"/>
+                                    <size key="itemSize" width="232" height="208"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SliderCollectionViewCell" id="Pfz-oN-mDu" customClass="SliderCollectionViewCell" customModule="What2Watch" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="172" height="208"/>
+                                        <rect key="frame" x="72" y="0.0" width="232" height="208"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="172" height="208"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="232" height="208"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MDQ-Me-u9h">
-                                                    <rect key="frame" x="18" y="36" width="136" height="136"/>
+                                                    <rect key="frame" x="48" y="36" width="136" height="136"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="MDQ-Me-u9h" secondAttribute="height" multiplier="1:1" id="Tbf-Lk-wsU"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watched Movies:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qS-jt-utt">
-                                                    <rect key="frame" x="12" y="12" width="148" height="20"/>
+                                                    <rect key="frame" x="12" y="12" width="208" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="240" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lkh-zO-0Ym">
-                                                    <rect key="frame" x="12" y="178" width="148" height="21"/>
+                                                    <rect key="frame" x="12" y="178" width="208" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2522,8 +2528,8 @@
                             <constraint firstItem="6pl-jH-0h6" firstAttribute="leading" secondItem="5yM-jJ-G7p" secondAttribute="leading" id="E32-Hh-HvF"/>
                             <constraint firstItem="Re2-8W-v1u" firstAttribute="centerX" secondItem="LJf-GH-Xbl" secondAttribute="centerX" id="E6Y-3o-OnE"/>
                             <constraint firstItem="6pl-jH-0h6" firstAttribute="trailing" secondItem="5yM-jJ-G7p" secondAttribute="trailing" id="Hid-9l-sWg"/>
+                            <constraint firstItem="6pl-jH-0h6" firstAttribute="top" secondItem="Re2-8W-v1u" secondAttribute="bottom" constant="40" id="Leu-u3-sX6"/>
                             <constraint firstAttribute="trailing" secondItem="5yM-jJ-G7p" secondAttribute="trailing" id="QIN-E9-GdY"/>
-                            <constraint firstItem="vQw-jj-Euk" firstAttribute="top" secondItem="6pl-jH-0h6" secondAttribute="bottom" constant="50" id="TEp-lQ-zXm"/>
                             <constraint firstItem="0Mu-vG-PV8" firstAttribute="top" secondItem="ZKF-ii-mMg" secondAttribute="bottom" constant="76" id="YEY-6c-GBG"/>
                             <constraint firstItem="0Mu-vG-PV8" firstAttribute="width" secondItem="LJf-GH-Xbl" secondAttribute="height" multiplier="200:667" id="nlt-Bf-6JL"/>
                             <constraint firstItem="5yM-jJ-G7p" firstAttribute="leading" secondItem="LJf-GH-Xbl" secondAttribute="leading" id="ob2-BL-jzC"/>
@@ -3119,8 +3125,8 @@
         <image name="yellowbox.png" width="749" height="136"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XHP-zg-Q8T"/>
-        <segue reference="x2J-qa-3VA"/>
-        <segue reference="kM5-IA-WxT"/>
+        <segue reference="D6W-7D-a9K"/>
+        <segue reference="6Ci-qd-Jzv"/>
+        <segue reference="c6u-1h-uWy"/>
     </inferredMetricsTieBreakers>
 </document>
