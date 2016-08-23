@@ -106,6 +106,8 @@ class MainScreenViewController: UIViewController {
             showInstruction(1)
         }
         
+        refreshAccuracyCounts({})
+        
         //draggableBackground.cardMovies = self.movies
         //draggableBackground.loadCards()
     }
@@ -148,6 +150,75 @@ class MainScreenViewController: UIViewController {
      Custom functions
      */
     
+    func refreshAccuracyCounts(completion: ()->()) {
+        //accuracy_top2000
+        dispatch_group_enter(globalGroup)
+        ref.child("users").child(AppState.MyUserID()).child("accuracy_top2000").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            CommonUtils.sharedUtils.hideProgress()
+            AppState.sharedInstance.accu_All_top2000 = Dictionary<String,Int>()
+            AppState.sharedInstance.accu_Like_top2000 = Dictionary<String,Int>()
+            AppState.sharedInstance.accu_Dislike_top2000 = Dictionary<String,Int>()
+            AppState.sharedInstance.accu_Watched_top2000 = Dictionary<String,Int>()
+            AppState.sharedInstance.accu_Havnt_top2000 = Dictionary<String,Int>()
+            if snapshot.exists() {
+                print(snapshot.childrenCount)
+                let top2000 = snapshot.valueInExportFormat() as? NSDictionary
+                if let accu_All_top2000 = top2000?["all"] as? NSDictionary {
+                    for key : AnyObject in accu_All_top2000.allKeys {
+                        let stringKey = key as! String
+                        if let keyValue = accu_All_top2000.valueForKey(stringKey) as? Int {
+                            AppState.sharedInstance.accu_All_top2000![stringKey] = keyValue
+                        }
+                    }
+                }
+                if let accu_Like_top2000 = top2000?[status_like] as? NSDictionary {
+                    for key : AnyObject in accu_Like_top2000.allKeys {
+                        let stringKey = key as! String
+                        if let keyValue = accu_Like_top2000.valueForKey(stringKey) as? Int {
+                            AppState.sharedInstance.accu_Like_top2000![stringKey] = keyValue
+                        }
+                    }
+                }
+                if let accu_Dislike_top2000 = top2000?[status_dislike] as? NSDictionary {
+                    for key : AnyObject in accu_Dislike_top2000.allKeys {
+                        let stringKey = key as! String
+                        if let keyValue = accu_Dislike_top2000.valueForKey(stringKey) as? Int {
+                            AppState.sharedInstance.accu_Dislike_top2000![stringKey] = keyValue
+                        }
+                    }
+                }
+                if let accu_Watched_top2000 = top2000?[status_watchlist] as? NSDictionary {
+                    for key : AnyObject in accu_Watched_top2000.allKeys {
+                        let stringKey = key as! String
+                        if let keyValue = accu_Watched_top2000.valueForKey(stringKey) as? Int {
+                            AppState.sharedInstance.accu_Watched_top2000![stringKey] = keyValue
+                        }
+                    }
+                }
+                if let accu_Havnt_top2000 = top2000?[status_haventWatched] as? NSDictionary {
+                    for key : AnyObject in accu_Havnt_top2000.allKeys {
+                        let stringKey = key as! String
+                        if let keyValue = accu_Havnt_top2000.valueForKey(stringKey) as? Int {
+                            AppState.sharedInstance.accu_Havnt_top2000![stringKey] = keyValue
+                        }
+                    }
+                }
+                
+            } else {
+                // Not have accuracy data
+                // AppState.sharedInstance.accuracy_top2000 = [:]
+            }
+            dispatch_group_leave(globalGroup)
+            completion()
+        }, withCancelBlock: { error in
+            print(error.description)
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            dispatch_group_leave(globalGroup)
+            completion()
+        })
+        
+    }
+    
     func onTapInstructionOverlay(sender: UILongPressGestureRecognizer? = nil) {
         //imgInstruction.hidden = true
         showInstruction(0)
@@ -170,15 +241,25 @@ class MainScreenViewController: UIViewController {
             if self.currentIndex > 0 {
                 self.movies.removeFirst(self.currentIndex)
             }
-            cardHolderView.reloadData()
+            if AppState.sharedInstance.accu_All_top2000 == nil {
+                self.refreshAccuracyCounts({
+                    self.filterDatawithAccuracy()
+                    self.cardHolderView.reloadData()
+                })
+            } else {
+                self.filterDatawithAccuracy()
+                self.cardHolderView.reloadData()
+            }
             
 //            draggableBackground.movies = self.movies
 //            draggableBackground.loadCardsFromIndex(skipIndexToMovie(skipToMovie))
         } else {
             //Load  Data first time from firebase
             CommonUtils.sharedUtils.showProgress(self.view, label: "We are loading the first poster!")
+            dispatch_group_enter(globalGroup)
             ref.child("movies").child("top2000").queryOrderedByKey().observeSingleEventOfType(.Value, withBlock: { snapshot in
                 CommonUtils.sharedUtils.hideProgress()
+                dispatch_group_leave(globalGroup)
                 if snapshot.exists() {
                     
                     print(snapshot.childrenCount)
@@ -210,8 +291,17 @@ class MainScreenViewController: UIViewController {
                     if self.currentIndex > 0 {
                         self.movies.removeFirst(self.currentIndex-1)
                     }
-                    self.cardHolderView.reloadData()
                     
+                    
+                    if AppState.sharedInstance.accu_All_top2000 == nil {
+                        self.refreshAccuracyCounts({
+                            self.filterDatawithAccuracy()
+                            self.cardHolderView.reloadData()
+                        })
+                    } else {
+                        self.filterDatawithAccuracy()
+                        self.cardHolderView.reloadData()
+                    }
 //                    self.draggableBackground.movies = self.movies
 //                    self.draggableBackground.loadCardsFromIndex(self.skipIndexToMovie(skipToMovie))
                 } else {
@@ -221,6 +311,17 @@ class MainScreenViewController: UIViewController {
                 }, withCancelBlock: { error in
                     print(error.description)
                     MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    dispatch_group_leave(globalGroup)
+            })
+            
+            dispatch_group_notify(globalGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                
+                dispatch_async(dispatch_get_main_queue(),{
+                    
+                    print(" 0 - - - - - - - - - - -  - - - - - - - - - --  - - - - - -- - - - -  - - -- - - - - - - - - - - - - - -")
+                    
+                    
+                })
             })
         }
     }
@@ -251,6 +352,104 @@ class MainScreenViewController: UIViewController {
         
         let imdbID = Movie["imdbID"] as? String ?? ""
         FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("lastSwiped").child("top2000").setValue(imdbID)
+        
+        if let genre = movies[forIndex]["genre"] as? String
+            where AppState.sharedInstance.accu_All_top2000 != nil
+        {
+            if var value = AppState.sharedInstance.accu_All_top2000![genre] {
+                value = value + 1
+                AppState.sharedInstance.accu_All_top2000![genre] = value
+            } else {
+                AppState.sharedInstance.accu_All_top2000![genre] = 1
+            }
+            
+            if var value = AppState.sharedInstance.accu_All_top2000!["Total"] {
+                value = value + 1
+                AppState.sharedInstance.accu_All_top2000!["Total"] = value
+            } else {
+                AppState.sharedInstance.accu_All_top2000!["Total"] = 1
+            }
+            print(" accu_All_top2000 \(AppState.sharedInstance.accu_All_top2000) ")
+            FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child("all").setValue(AppState.sharedInstance.accu_All_top2000!)
+            if Status == status_like
+            && AppState.sharedInstance.accu_Like_top2000 != nil
+            {
+                if var value = AppState.sharedInstance.accu_Like_top2000![genre] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Like_top2000![genre] = value
+                } else {
+                    AppState.sharedInstance.accu_Like_top2000![genre] = 1
+                }
+                
+                if var value = AppState.sharedInstance.accu_Like_top2000!["Total"] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Like_top2000!["Total"] = value
+                } else {
+                    AppState.sharedInstance.accu_Like_top2000!["Total"] = 1
+                }
+                print(" accu_Like_top2000 \(AppState.sharedInstance.accu_Like_top2000) ")
+                FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_like).setValue(AppState.sharedInstance.accu_Like_top2000!)
+            }
+            else if Status == status_dislike
+                && AppState.sharedInstance.accu_Dislike_top2000 != nil
+            {
+                if var value = AppState.sharedInstance.accu_Dislike_top2000![genre] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Dislike_top2000![genre] = value
+                } else {
+                    AppState.sharedInstance.accu_Dislike_top2000![genre] = 1
+                }
+                
+                if var value = AppState.sharedInstance.accu_Dislike_top2000!["Total"] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Dislike_top2000!["Total"] = value
+                } else {
+                    AppState.sharedInstance.accu_Dislike_top2000!["Total"] = 1
+                }
+                print(" accu_Dislike_top2000 \(AppState.sharedInstance.accu_Dislike_top2000) ")
+                FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_dislike).setValue(AppState.sharedInstance.accu_Dislike_top2000!)
+            }
+            else if Status == status_watchlist
+                && AppState.sharedInstance.accu_Watched_top2000 != nil
+            {
+                if var value = AppState.sharedInstance.accu_Watched_top2000![genre] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Watched_top2000![genre] = value
+                } else {
+                    AppState.sharedInstance.accu_Watched_top2000![genre] = 1
+                }
+                
+                if var value = AppState.sharedInstance.accu_Watched_top2000!["Total"] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Watched_top2000!["Total"] = value
+                } else {
+                    AppState.sharedInstance.accu_Watched_top2000!["Total"] = 1
+                }
+                print(" accu_Watched_top2000 \(AppState.sharedInstance.accu_Watched_top2000) ")
+                FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_watchlist).setValue(AppState.sharedInstance.accu_Watched_top2000!)
+            }
+            else if Status == status_haventWatched
+                && AppState.sharedInstance.accu_Havnt_top2000 != nil
+            {
+                if var value = AppState.sharedInstance.accu_Havnt_top2000![genre] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Havnt_top2000![genre] = value
+                } else {
+                    AppState.sharedInstance.accu_Havnt_top2000![genre] = 1
+                }
+                
+                if var value = AppState.sharedInstance.accu_Havnt_top2000!["Total"] {
+                    value = value + 1
+                    AppState.sharedInstance.accu_Havnt_top2000!["Total"] = value
+                } else {
+                    AppState.sharedInstance.accu_Havnt_top2000!["Total"] = 1
+                }
+                print(" accu_Havnt_top2000 \(AppState.sharedInstance.accu_Havnt_top2000) ")
+                FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_haventWatched).setValue(AppState.sharedInstance.accu_Havnt_top2000!)
+            }
+            
+        }
+        
         NSUserDefaults.standardUserDefaults().setObject(imdbID, forKey: "lastSwiped_top2000")
         NSUserDefaults.standardUserDefaults().synchronize()
     }
@@ -304,12 +503,12 @@ extension MainScreenViewController: KolodaViewDelegate {
         
         switch direction {
         case .Left, .TopLeft, .BottomLeft:
-            print("Liked")
-            SaveSwipeEntry(Int(index), Status: status_like)
-            break
-        case .Right, .TopRight, .BottomRight:
             print("Disliked")
             SaveSwipeEntry(Int(index), Status: status_dislike)
+            break
+        case .Right, .TopRight, .BottomRight:
+            print("Liked")
+            SaveSwipeEntry(Int(index), Status: status_like)
             break
         case .Up:
             print("Haven't Watched")
@@ -345,5 +544,70 @@ extension MainScreenViewController: KolodaViewDataSource {
     func koloda(koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
         return NSBundle.mainBundle().loadNibNamed("CustomOverlayView",
                                                   owner: self, options: nil)[0] as? OverlayView
+    }
+    
+    
+    /*
+     Filter with accuracy
+     criteria:
+     
+     Dislike = x = 15%
+     Like = y = 35%
+     Watchlist = a = 20%
+     Haven’t Watched = b = 30%
+     Amount Swiped = z
+     
+     Answer = (x(z))*(y(z))*(a(z))*(b(*z*))
+     Answer / x = Dislike Percentage
+     Answer / y = Like Percentage
+     Answer / a = Watchlist Percentage
+     Answer / b = Watched Percentage
+     
+     If Dislike Percentage > 25% of Answer, recommend 50% less of most disliked genre.
+     If Like Percentage > 45% of Answer, recommend 50% more of most liked genre.
+     If Watchlist Percentage > 35% of Answer, recommend 50% more of most watchlisted genre.
+     If Watched Percentage > 40% of Answer, recommend 50% more of most watched genre.
+
+     */
+    
+    func filterDatawithAccuracy()
+    {
+        if AppState.sharedInstance.accu_All_top2000 != nil
+        {
+            let totalSwiped:Double = Double(AppState.sharedInstance.accu_All_top2000?["Total"] ?? 0)
+            let totalLiked:Double = Double(AppState.sharedInstance.accu_Like_top2000?["Total"] ?? 0)
+            let totalDisLiked:Double = Double(AppState.sharedInstance.accu_Dislike_top2000?["Total"] ?? 0)
+            let totalWatchlist:Double = Double(AppState.sharedInstance.accu_Watched_top2000?["Total"] ?? 0)
+            let totalHaventWatched:Double = Double(AppState.sharedInstance.accu_Havnt_top2000?["Total"] ?? 0)
+            
+            if totalLiked > 0
+                && totalDisLiked > 0
+                && totalWatchlist > 0
+                && totalHaventWatched > 0 {
+                
+                let per_Dislike = ((totalDisLiked / totalSwiped) * 15)
+                let per_Liked = ((totalLiked / totalSwiped) * 35)
+                let per_Watchlist = ((totalWatchlist / totalSwiped) * 20)
+                let per_HaventWatched = ((totalHaventWatched / totalSwiped) * 30)
+                
+                print("totalDisLiked % : \(per_Dislike)")
+                print("totalLiked % : \(per_Liked)")
+                print("totalWatchlist % : \(per_Watchlist)")
+                print("totalHaventWatched % : \(per_HaventWatched)")
+                
+                let Answer = ((totalDisLiked / totalSwiped) * 15) * ((totalLiked / totalSwiped) * 35)  * ((totalWatchlist / totalSwiped) * 20)  * ((totalHaventWatched / totalSwiped) * 30)
+                print("Answer : \(Answer)")
+                
+                let dislike_per = (Answer / per_Dislike)
+                let liked_per = (Answer / per_Liked)
+                let watchlist_per = (per_Watchlist / Answer)
+                let HaventWatched_per = (per_HaventWatched / Answer)
+                
+                print("dislike_per % : \(dislike_per)")
+                print("liked_per % : \(liked_per)")
+                print("watchlist_per % : \(watchlist_per)")
+                print("HaventWatched_per % : \(HaventWatched_per)")
+            }
+        }
     }
 }
