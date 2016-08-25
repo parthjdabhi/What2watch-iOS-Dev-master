@@ -595,8 +595,11 @@ extension MainScreenViewController: KolodaViewDataSource {
                 print("totalWatchlist % : \(per_Watchlist)")
                 print("totalHaventWatched % : \(per_HaventWatched)")
                 
-                let Answer = ((totalDisLiked / totalSwiped) * 15) * ((totalLiked / totalSwiped) * 35)  * ((totalWatchlist / totalSwiped) * 20)  * ((totalHaventWatched / totalSwiped) * 30)
+                let Answer = per_Dislike * per_Liked  * per_Watchlist  * per_HaventWatched
                 print("Answer : \(Answer)")
+                
+                let Answer1 = ((totalDisLiked / totalSwiped) * 15) * ((totalLiked / totalSwiped) * 35)  * ((totalWatchlist / totalSwiped) * 20)  * ((totalHaventWatched / totalSwiped) * 30)
+                print("Answer1 : \(Answer1)")
                 
                 let dislike_per = (Answer / per_Dislike)
                 let liked_per = (Answer / per_Liked)
@@ -611,7 +614,82 @@ extension MainScreenViewController: KolodaViewDataSource {
                 print("liked_per % : \(liked_per)")
                 print("watchlist_per % : \(watchlist_per)")
                 print("HaventWatched_per % : \(HaventWatched_per)")
+                
+                //---------------------------------------------------
+                // Let's start calculation with : (per_Dislike) Dislike = x = 15% ...
+                //---------------------------------------------------
+                
+                // If Dislike Percentage > 25% of Answer, recommend 50% less of most disliked genre.
+                // If Like Percentage > 45% of Answer, recommend 50% more of most liked genre.
+                // If Watchlist Percentage > 35% of Answer, recommend 50% more of most watchlisted genre.
+                // If Watched Percentage > 40% of Answer, recommend 50% more of most watched genre.
+                
+                print("Dislike \(per_Dislike) Movie : recommend 50% less of \(getGenreWithHeighestValue(AppState.sharedInstance.accu_Dislike_top2000).genre ?? "") genre")
+                print("Like \(per_Liked) Movie : recommend 50% more of \(getGenreWithHeighestValue(AppState.sharedInstance.accu_Like_top2000).genre ?? "")  genre")
+                print("Watchlist \(per_Watchlist) Movie : 50% more of \(getGenreWithHeighestValue(AppState.sharedInstance.accu_Watched_top2000).genre ?? "") genre")
+                print("Watched \(per_HaventWatched) Movie : 50% more of \(getGenreWithHeighestValue(AppState.sharedInstance.accu_Havnt_top2000).genre ?? "") genre")
+                
+                let FilteredMovie = filterMoviesWithGenre(getGenreWithHeighestValue(AppState.sharedInstance.accu_Dislike_top2000).genre!, Probability: 50.0)
+                
+                if per_Dislike >= 25 {
+                    //recommend 50% less of most disliked genre
+                    if  let genre = getGenreWithHeighestValue(AppState.sharedInstance.accu_Dislike_top2000).genre {
+                        print("recommend 50% \(per_Dislike) less of \(genre) genre")
+                    }
+                }
+                else if per_Liked >= 25 {
+                    //recommend 50% less of most disliked genre
+                }
             }
         }
+    }
+    
+    func getGenreWithHeighestValue(Stastics:Dictionary<String,Int>?) -> (genre:String?,Value:Int?) {
+        if Stastics == nil {
+            return (nil,0)
+        }
+        var Highest = 0
+        var Genre = ""
+        for (key, Value) in Stastics! {
+            //print("key: \(key)")
+            if Value > Highest
+                && key != "Total"
+            {
+                Highest = Value
+                Genre = key
+            }
+        }
+        print("Highest Gener with value : \(Highest) \(Genre)")
+        return (Genre,Highest)
+    }
+    
+    func filterMoviesWithGenre(genre:String,Probability:Double,isFilterWithGenre:Bool = false) -> (Array<[String:AnyObject]>?) {
+        
+        var TotalFound = 0
+        var skipped = 0
+        
+        let FilteredMovie = self.movies.filter { (Movie:[String : AnyObject]) -> Bool in
+            if let movieGenre = Movie["genre"] as? String
+                where movieGenre == genre
+            {
+                TotalFound = TotalFound + 1
+                let randomNumber = randomPercent()
+                if randomNumber < Probability {
+                    return true
+                } else {
+                    skipped = skipped + 1
+                    return false
+                }
+            }
+            return true
+        }
+        print("Filtered \(FilteredMovie.count) movie from \(self.movies.count) with probability of \(Probability) of genre \(genre) \n TotalFound \(TotalFound) & skipped = \(skipped)")
+         
+        return FilteredMovie
+    }
+    
+    // create a random percent, with a precision of one decimal place
+    func randomPercent() -> Double {
+        return Double(arc4random() % 1000) / 10.0;
     }
 }
