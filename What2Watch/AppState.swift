@@ -22,11 +22,18 @@ class AppState: NSObject {
     var timeWatched: String?
     var watchlistCount: String?
     
+    //Improve accuracy
     var accu_All_top2000: Dictionary<String,Int>?
     var accu_Like_top2000: Dictionary<String,Int>?
     var accu_Dislike_top2000: Dictionary<String,Int>?
     var accu_Watched_top2000: Dictionary<String,Int>?
     var accu_Havnt_top2000: Dictionary<String,Int>?
+    
+    //Recommendation
+    var OUser_Like_top2000: [Array<[String:AnyObject]>] = []
+    var My_Like_top2000: Array<[String:AnyObject]> = []      //[Dictionary<String,String>], Array<[String:AnyObject]>
+    var My_Like_MovieID_top2000: Array<String> = []
+    var My_Like_Recom_MovieID_top2000: Array<String> = []
     
     var movies: Array<[String:AnyObject]>? = []
     

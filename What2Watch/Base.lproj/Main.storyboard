@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e2S-gn-vZb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e2S-gn-vZb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -322,6 +322,7 @@
                         <segue destination="i0p-UN-soW" kind="custom" identifier="segueWatchlist" customClass="SWRevealViewControllerSeguePushController" id="Qtx-5D-qGC"/>
                         <segue destination="i51-Qf-Efv" kind="custom" identifier="segueWhat2Watch" customClass="SWRevealViewControllerSeguePushController" id="Ifu-4D-EDe"/>
                         <segue destination="SzR-rt-rLv" kind="custom" identifier="segueMyProfile" customClass="SWRevealViewControllerSeguePushController" id="HfR-K6-nPZ"/>
+                        <segue destination="F2j-l8-tHw" kind="custom" identifier="segueHelp" customClass="SWRevealViewControllerSeguePushController" id="jgZ-FB-yfA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3cT-Dc-u5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -343,7 +344,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nbh-Oq-J44" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1156.5" y="-3158.5"/>
+            <point key="canvasLocation" x="-1268.5" y="-3174.5"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="ml3-eE-kf9">
@@ -367,7 +368,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06G-Ha-FHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1156.5" y="-2359.5"/>
+            <point key="canvasLocation" x="-1268.5" y="-2367.5"/>
         </scene>
         <!--Main Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -1019,7 +1020,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Xe-Cq-Q9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2215.5" y="-687.5"/>
+            <point key="canvasLocation" x="-2349.5" y="-709.5"/>
         </scene>
         <!--SignInViewController-->
         <scene sceneID="12V-UE-ffE">
@@ -1581,7 +1582,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMb-eh-xEv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3979.5" y="-706.5"/>
+            <point key="canvasLocation" x="-3973.5" y="-687.5"/>
         </scene>
         <!--Gender View Controller-->
         <scene sceneID="zRE-Cn-YH5">
@@ -1816,7 +1817,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ChR-Rs-sCO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3359.5" y="-705.5"/>
+            <point key="canvasLocation" x="-3417.5" y="-701.5"/>
         </scene>
         <!--Terms View Controller-->
         <scene sceneID="kaj-MK-8E6">
@@ -1979,12 +1980,12 @@
                         <outlet property="forwardArrow" destination="uXV-OB-Pn9" id="qsM-kL-GRC"/>
                         <outlet property="getStarted" destination="ox5-g8-gra" id="bON-rJ-sSk"/>
                         <outlet property="getStartedText" destination="xtv-OA-R0o" id="qdj-FQ-9zd"/>
-                        <segue destination="nrJ-hU-xvf" kind="show" identifier="segueMainScreen" id="XHP-zg-Q8T"/>
+                        <segue destination="Yh5-VM-GF8" kind="show" identifier="segueMainScreen" id="u9L-yt-41Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXV-Hb-1oN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2779.5" y="-706.5"/>
+            <point key="canvasLocation" x="-2853.5" y="-701.5"/>
         </scene>
         <!--Email View Controller-->
         <scene sceneID="ZQY-3W-d8Q">
@@ -2111,7 +2112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hO2-c2-qeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3359.5" y="-1527.5"/>
+            <point key="canvasLocation" x="-3417.5" y="-1522.5"/>
         </scene>
         <!--Name View Controller-->
         <scene sceneID="zaa-Ma-SpF">
@@ -2228,7 +2229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZdF-lC-rlN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2779.5" y="-1527.5"/>
+            <point key="canvasLocation" x="-2853.5" y="-1522.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eri-Hd-xkF">
@@ -2268,10 +2269,10 @@
             </objects>
             <point key="canvasLocation" x="-511.5" y="-1473.5"/>
         </scene>
-        <!--What2 Watch View Controller-->
+        <!--RecomendationVC-->
         <scene sceneID="aW2-TW-0pe">
             <objects>
-                <viewController id="tXF-5q-S5X" customClass="What2WatchViewController" customModule="What2Watch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tXF-5q-S5X" customClass="RecomendationVC" customModule="What2Watch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XZc-SM-kcJ"/>
                         <viewControllerLayoutGuide type="bottom" id="0xa-OI-657"/>
@@ -2318,24 +2319,33 @@
                                     <constraint firstItem="FHg-ew-W67" firstAttribute="leading" secondItem="BHv-F1-hH5" secondAttribute="trailing" constant="-44" id="vXf-3w-BNv"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What2Watch Screen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06O-rb-xQK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What2Watch Recommendation Screen" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06O-rb-xQK">
                                 <rect key="frame" x="48" y="267" width="279" height="168"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-ec-p0H">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="uAu-ec-p0H" firstAttribute="leading" secondItem="zW2-6e-Sgz" secondAttribute="leading" id="B20-ed-wmh"/>
                             <constraint firstItem="LUI-Rm-GKH" firstAttribute="leading" secondItem="zW2-6e-Sgz" secondAttribute="leading" id="FhY-XI-W7W"/>
+                            <constraint firstItem="uAu-ec-p0H" firstAttribute="top" secondItem="LUI-Rm-GKH" secondAttribute="bottom" id="PJe-wj-mH4"/>
+                            <constraint firstAttribute="trailing" secondItem="uAu-ec-p0H" secondAttribute="trailing" id="aGi-c8-ZM9"/>
                             <constraint firstItem="LUI-Rm-GKH" firstAttribute="top" secondItem="zW2-6e-Sgz" secondAttribute="top" id="f1O-NY-wuk"/>
+                            <constraint firstItem="0xa-OI-657" firstAttribute="top" secondItem="uAu-ec-p0H" secondAttribute="bottom" id="mhq-1v-MpH"/>
                             <constraint firstAttribute="trailing" secondItem="LUI-Rm-GKH" secondAttribute="trailing" id="wEm-I9-zTM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rPR-uU-640"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="btnMenu" destination="BHv-F1-hH5" id="wv6-6r-2pb"/>
+                        <outlet property="btnMenu" destination="BHv-F1-hH5" id="ETm-G0-U3W"/>
+                        <outlet property="imgPoster" destination="uAu-ec-p0H" id="4vS-gc-NJd"/>
+                        <outlet property="lblMsgCentered" destination="06O-rb-xQK" id="KIg-iy-1YO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYZ-2l-nqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2554,7 +2564,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDu-VH-hNs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1246.5" y="202.5"/>
+            <point key="canvasLocation" x="-1268.5" y="202.5"/>
         </scene>
         <!--Movie WatchedVC-->
         <scene sceneID="VXM-Kz-QDt">
@@ -3077,6 +3087,99 @@
             </objects>
             <point key="canvasLocation" x="174.5" y="-1473.5"/>
         </scene>
+        <!--HelpVC-->
+        <scene sceneID="AvK-Q3-IJv">
+            <objects>
+                <viewController id="ODM-rq-ufS" customClass="HelpVC" customModule="What2Watch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1rN-Pe-7DR"/>
+                        <viewControllerLayoutGuide type="bottom" id="yOJ-cF-OgN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z7E-UV-Ujq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KkX-Qm-TXs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowbox.png" translatesAutoresizingMaskIntoConstraints="NO" id="uMG-qN-pJY">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="PqP-xI-MLU"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="What2Watch.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z7n-sd-H2w">
+                                        <rect key="frame" x="112" y="31" width="150" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="U4H-UE-VuT"/>
+                                            <constraint firstAttribute="height" constant="17" id="rYY-Q5-ck4"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGu-v7-o0i">
+                                        <rect key="frame" x="8" y="24" width="36" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="OHQ-LS-lIt"/>
+                                            <constraint firstAttribute="width" constant="36" id="mWf-am-zhJ"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="menu button.png"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="uMG-qN-pJY" secondAttribute="trailing" id="Dkm-ZM-H7q"/>
+                                    <constraint firstItem="uMG-qN-pJY" firstAttribute="leading" secondItem="vGu-v7-o0i" secondAttribute="trailing" constant="-44" id="TQJ-Z2-Uun"/>
+                                    <constraint firstItem="uMG-qN-pJY" firstAttribute="top" secondItem="KkX-Qm-TXs" secondAttribute="top" id="fp7-O5-hgO"/>
+                                    <constraint firstItem="Z7n-sd-H2w" firstAttribute="top" secondItem="uMG-qN-pJY" secondAttribute="bottom" constant="-33" id="i33-qi-F4e"/>
+                                    <constraint firstItem="vGu-v7-o0i" firstAttribute="top" secondItem="uMG-qN-pJY" secondAttribute="bottom" constant="-40" id="jHX-5m-sad"/>
+                                    <constraint firstItem="uMG-qN-pJY" firstAttribute="leading" secondItem="KkX-Qm-TXs" secondAttribute="leading" id="r3G-3O-TyL"/>
+                                    <constraint firstAttribute="bottom" secondItem="uMG-qN-pJY" secondAttribute="bottom" id="wZb-0i-gby"/>
+                                    <constraint firstItem="uMG-qN-pJY" firstAttribute="centerX" secondItem="Z7n-sd-H2w" secondAttribute="centerX" id="yDB-ez-SQz"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What2Watch Help - FAQ Screen" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTG-VL-M0P">
+                                <rect key="frame" x="48" y="267" width="279" height="168"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KkX-Qm-TXs" secondAttribute="trailing" id="1JY-mp-ec7"/>
+                            <constraint firstItem="KkX-Qm-TXs" firstAttribute="top" secondItem="Z7E-UV-Ujq" secondAttribute="top" id="6Re-p1-Rhz"/>
+                            <constraint firstItem="KkX-Qm-TXs" firstAttribute="leading" secondItem="Z7E-UV-Ujq" secondAttribute="leading" id="C14-Wb-mrK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="6vl-MA-z8d"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="btnMenu" destination="vGu-v7-o0i" id="z33-Uc-pBw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oPa-wM-xLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1785.5" y="188.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jeA-Z3-gVk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="F2j-l8-tHw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BZz-FH-ghz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ODM-rq-ufS" kind="relationship" relationship="rootViewController" id="Xc2-6c-0BT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UP6-8I-5rt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1785.5" y="-627.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Background10.png" width="750" height="1334"/>
@@ -3125,6 +3228,7 @@
         <image name="yellowbox.png" width="749" height="136"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="u9L-yt-41Q"/>
         <segue reference="D6W-7D-a9K"/>
         <segue reference="6Ci-qd-Jzv"/>
         <segue reference="c6u-1h-uWy"/>

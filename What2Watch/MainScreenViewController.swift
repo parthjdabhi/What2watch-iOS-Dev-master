@@ -40,6 +40,8 @@ class MainScreenViewController: UIViewController {
     //var draggableBackground: DraggableViewBackground!
     
     var movies:Array<[String:AnyObject]> = []
+    var accu_movies:Array<[String:AnyObject]> = []
+    
     var lastSwipedMovie:String?
 
     override func viewDidLoad() {
@@ -369,10 +371,12 @@ class MainScreenViewController: UIViewController {
             } else {
                 AppState.sharedInstance.accu_All_top2000!["Total"] = 1
             }
+            
             print(" accu_All_top2000 \(AppState.sharedInstance.accu_All_top2000) ")
             FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child("all").setValue(AppState.sharedInstance.accu_All_top2000!)
+            
             if Status == status_like
-            && AppState.sharedInstance.accu_Like_top2000 != nil
+                && AppState.sharedInstance.accu_Like_top2000 != nil
             {
                 if var value = AppState.sharedInstance.accu_Like_top2000![genre] {
                     value = value + 1
@@ -387,6 +391,7 @@ class MainScreenViewController: UIViewController {
                 } else {
                     AppState.sharedInstance.accu_Like_top2000!["Total"] = 1
                 }
+                
                 print(" accu_Like_top2000 \(AppState.sharedInstance.accu_Like_top2000) ")
                 FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_like).setValue(AppState.sharedInstance.accu_Like_top2000!)
             }
@@ -406,6 +411,7 @@ class MainScreenViewController: UIViewController {
                 } else {
                     AppState.sharedInstance.accu_Dislike_top2000!["Total"] = 1
                 }
+                
                 print(" accu_Dislike_top2000 \(AppState.sharedInstance.accu_Dislike_top2000) ")
                 FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_dislike).setValue(AppState.sharedInstance.accu_Dislike_top2000!)
             }
@@ -425,6 +431,7 @@ class MainScreenViewController: UIViewController {
                 } else {
                     AppState.sharedInstance.accu_Watched_top2000!["Total"] = 1
                 }
+                
                 print(" accu_Watched_top2000 \(AppState.sharedInstance.accu_Watched_top2000) ")
                 FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_watchlist).setValue(AppState.sharedInstance.accu_Watched_top2000!)
             }
@@ -444,10 +451,10 @@ class MainScreenViewController: UIViewController {
                 } else {
                     AppState.sharedInstance.accu_Havnt_top2000!["Total"] = 1
                 }
+                
                 print(" accu_Havnt_top2000 \(AppState.sharedInstance.accu_Havnt_top2000) ")
                 FIRDatabase.database().reference().child("users").child(AppState.MyUserID()).child("accuracy_top2000").child(status_haventWatched).setValue(AppState.sharedInstance.accu_Havnt_top2000!)
             }
-            
         }
         
         NSUserDefaults.standardUserDefaults().setObject(imdbID, forKey: "lastSwiped_top2000")
@@ -583,8 +590,8 @@ extension MainScreenViewController: KolodaViewDataSource {
             if totalLiked > 0
                 && totalDisLiked > 0
                 && totalWatchlist > 0
-                && totalHaventWatched > 0 {
-                
+                && totalHaventWatched > 0
+            {
                 let per_Dislike = ((totalDisLiked / totalSwiped) * 15)
                 let per_Liked = ((totalLiked / totalSwiped) * 35)
                 let per_Watchlist = ((totalWatchlist / totalSwiped) * 20)
@@ -629,16 +636,41 @@ extension MainScreenViewController: KolodaViewDataSource {
                 print("Watchlist \(per_Watchlist) Movie : 50% more of \(getGenreWithHeighestValue(AppState.sharedInstance.accu_Watched_top2000).genre ?? "") genre")
                 print("Watched \(per_HaventWatched) Movie : 50% more of \(getGenreWithHeighestValue(AppState.sharedInstance.accu_Havnt_top2000).genre ?? "") genre")
                 
-                let FilteredMovie = filterMoviesWithGenre(getGenreWithHeighestValue(AppState.sharedInstance.accu_Dislike_top2000).genre!, Probability: 50.0)
-                
                 if per_Dislike >= 25 {
-                    //recommend 50% less of most disliked genre
+                    //If Dislike Percentage > 25% of Answer, recommend 50% less of most disliked genre.
                     if  let genre = getGenreWithHeighestValue(AppState.sharedInstance.accu_Dislike_top2000).genre {
                         print("recommend 50% \(per_Dislike) less of \(genre) genre")
+                        let FilteredMovie = filterMoviesWithGenre(getGenreWithHeighestValue(AppState.sharedInstance.accu_Dislike_top2000).genre!, Probability: 50.0,type: matchType.Least)
+                        movies = FilteredMovie
+                        cardHolderView.reloadData()
                     }
                 }
-                else if per_Liked >= 25 {
-                    //recommend 50% less of most disliked genre
+                else if per_Dislike >= 45 {
+                    //If Like Percentage > 45% of Answer, recommend 50% more of most liked genre.
+                    if  let genre = getGenreWithHeighestValue(AppState.sharedInstance.accu_Like_top2000).genre {
+                        print("recommend 50% \(per_Dislike) more of \(genre) genre")
+                        let FilteredMovie = filterMoviesWithGenre(getGenreWithHeighestValue(AppState.sharedInstance.accu_Like_top2000).genre!, Probability: 50.0,type: matchType.Most)
+                        movies = FilteredMovie
+                        cardHolderView.reloadData()
+                    }
+                }
+                else if per_HaventWatched >= 30 {
+                    //If Watchlist Percentage > 35% of Answer, recommend 50% more of most watchlisted genre.
+                    if  let genre = getGenreWithHeighestValue(AppState.sharedInstance.accu_Havnt_top2000).genre {
+                        print("recommend 50% \(per_Dislike) more of \(genre) genre")
+                        let FilteredMovie = filterMoviesWithGenre(getGenreWithHeighestValue(AppState.sharedInstance.accu_Havnt_top2000).genre!, Probability: 50.0,type: matchType.Most)
+                        movies = FilteredMovie
+                        cardHolderView.reloadData()
+                    }
+                }
+                else if per_Watchlist >= 40 {
+                    //If Watched Percentage > 40% of Answer, recommend 50% more of most watched genre.
+                    if  let genre = getGenreWithHeighestValue(AppState.sharedInstance.accu_Watched_top2000).genre {
+                        print("recommend 50% \(per_Dislike) more of \(genre) genre")
+                        let FilteredMovie = filterMoviesWithGenre(getGenreWithHeighestValue(AppState.sharedInstance.accu_Watched_top2000).genre!, Probability: 50.0,type: matchType.Most)
+                        movies = FilteredMovie
+                        cardHolderView.reloadData()
+                    }
                 }
             }
         }
@@ -663,27 +695,49 @@ extension MainScreenViewController: KolodaViewDataSource {
         return (Genre,Highest)
     }
     
-    func filterMoviesWithGenre(genre:String,Probability:Double,isFilterWithGenre:Bool = false) -> (Array<[String:AnyObject]>?) {
+    enum matchType {
+        case Least
+        case Most
+    }
+    
+    func filterMoviesWithGenre(genre:String,Probability:Double,type:matchType) -> (Array<[String:AnyObject]>) {
         
         var TotalFound = 0
         var skipped = 0
         
         let FilteredMovie = self.movies.filter { (Movie:[String : AnyObject]) -> Bool in
-            if let movieGenre = Movie["genre"] as? String
-                where movieGenre == genre
-            {
-                TotalFound = TotalFound + 1
-                let randomNumber = randomPercent()
-                if randomNumber < Probability {
+            switch (type) {
+                case matchType.Least:
+                    if let movieGenre = Movie["genre"] as? String
+                        where movieGenre == genre
+                    {
+                        TotalFound = TotalFound + 1
+                        let randomNumber = randomPercent()
+                        if randomNumber < Probability {
+                            return true
+                        } else {
+                            skipped = skipped + 1
+                            return false
+                        }
+                    }
                     return true
-                } else {
-                    skipped = skipped + 1
-                    return false
-                }
+                case matchType.Most:
+                    if let movieGenre = Movie["genre"] as? String
+                        where movieGenre != genre
+                    {
+                        TotalFound = TotalFound + 1
+                        let randomNumber = randomPercent()
+                        if randomNumber < Probability {
+                            return true
+                        } else {
+                            skipped = skipped + 1
+                            return false
+                        }
+                    }
+                    return true
             }
-            return true
         }
-        print("Filtered \(FilteredMovie.count) movie from \(self.movies.count) with probability of \(Probability) of genre \(genre) \n TotalFound \(TotalFound) & skipped = \(skipped)")
+        print("\((type==matchType.Least) ? "Least" : "Most") Filtered \(FilteredMovie.count) movie from \(self.movies.count) with probability of \(Probability) of genre \(genre) \n TotalFound \(TotalFound) & skipped = \(skipped)")
          
         return FilteredMovie
     }

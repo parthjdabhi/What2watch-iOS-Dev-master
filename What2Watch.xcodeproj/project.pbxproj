@@ -10,7 +10,7 @@
 		4950EBE11D3F70B500673FA4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950EBE01D3F70B500673FA4 /* MBProgressHUD.m */; };
 		5E00826C1D55F9A6009DED1E /* MySlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0082691D55F9A6009DED1E /* MySlideMenuController.swift */; };
 		5E00826D1D55F9A6009DED1E /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E00826A1D55F9A6009DED1E /* WatchlistViewController.swift */; };
-		5E00826E1D55F9A6009DED1E /* What2WatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E00826B1D55F9A6009DED1E /* What2WatchViewController.swift */; };
+		5E00826E1D55F9A6009DED1E /* HelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E00826B1D55F9A6009DED1E /* HelpVC.swift */; };
 		5E0082881D56595A009DED1E /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0082821D565959009DED1E /* help.png */; };
 		5E0082891D56595A009DED1E /* Improve-Accuracy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0082831D565959009DED1E /* Improve-Accuracy@3x.png */; };
 		5E00828A1D56595A009DED1E /* setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0082841D565959009DED1E /* setting@3x.png */; };
@@ -19,6 +19,7 @@
 		5E00828D1D56595A009DED1E /* watchlist@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E0082871D565959009DED1E /* watchlist@3x.png */; };
 		5E0082901D565FCB009DED1E /* setting1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E00828E1D565FCA009DED1E /* setting1.png */; };
 		5E0082911D565FCB009DED1E /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E00828F1D565FCB009DED1E /* user.png */; };
+		5EAAB95D1D78053E009199A5 /* RecomendationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAB95C1D78053E009199A5 /* RecomendationVC.swift */; };
 		5EAD89471D6864B80058AC3E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD89461D6864B80058AC3E /* main.swift */; };
 		5ECD100E1D672CB900EC54A8 /* BackgroundAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD100A1D672CB900EC54A8 /* BackgroundAnimationViewController.swift */; };
 		5ECD100F1D672CB900EC54A8 /* BackgroundKolodaAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECD100B1D672CB900EC54A8 /* BackgroundKolodaAnimator.swift */; };
@@ -167,7 +168,7 @@
 		51616C393DC0C3D9144FC642 /* Pods-What2WatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-What2WatchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-What2WatchTests/Pods-What2WatchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5E0082691D55F9A6009DED1E /* MySlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySlideMenuController.swift; sourceTree = "<group>"; };
 		5E00826A1D55F9A6009DED1E /* WatchlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
-		5E00826B1D55F9A6009DED1E /* What2WatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = What2WatchViewController.swift; sourceTree = "<group>"; };
+		5E00826B1D55F9A6009DED1E /* HelpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpVC.swift; sourceTree = "<group>"; };
 		5E0082821D565959009DED1E /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
 		5E0082831D565959009DED1E /* Improve-Accuracy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Improve-Accuracy@3x.png"; sourceTree = "<group>"; };
 		5E0082841D565959009DED1E /* setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@3x.png"; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 		5E0082871D565959009DED1E /* watchlist@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watchlist@3x.png"; sourceTree = "<group>"; };
 		5E00828E1D565FCA009DED1E /* setting1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting1.png; sourceTree = "<group>"; };
 		5E00828F1D565FCB009DED1E /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
+		5EAAB95C1D78053E009199A5 /* RecomendationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecomendationVC.swift; sourceTree = "<group>"; };
 		5EAD89461D6864B80058AC3E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5ECD100A1D672CB900EC54A8 /* BackgroundAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationViewController.swift; sourceTree = "<group>"; };
 		5ECD100B1D672CB900EC54A8 /* BackgroundKolodaAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundKolodaAnimator.swift; sourceTree = "<group>"; };
@@ -372,6 +374,26 @@
 			name = unused;
 			sourceTree = "<group>";
 		};
+		5EAAB95A1D7804F2009199A5 /* My Profile  */ = {
+			isa = PBXGroup;
+			children = (
+				5ECD1B181D62EDE900C301DF /* MyProfileViewController.swift */,
+				5ECD1B2F1D63033600C301DF /* SliderCollectionViewCell.swift */,
+				5ECD1B311D63180D00C301DF /* MovieWatchedVC.swift */,
+				5ECD1B331D631DFA00C301DF /* MovieListTableViewCell.swift */,
+			);
+			name = "My Profile ";
+			sourceTree = "<group>";
+		};
+		5EAAB95B1D780512009199A5 /* Menu Page */ = {
+			isa = PBXGroup;
+			children = (
+				5E00826A1D55F9A6009DED1E /* WatchlistViewController.swift */,
+				5EAAB95C1D78053E009199A5 /* RecomendationVC.swift */,
+			);
+			name = "Menu Page";
+			sourceTree = "<group>";
+		};
 		5ECD0FFA1D66D59700EC54A8 /* Movie Swiping */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,13 +410,11 @@
 		5ECD1B171D62EC4F00C301DF /* New Screen */ = {
 			isa = PBXGroup;
 			children = (
-				5ECD1B181D62EDE900C301DF /* MyProfileViewController.swift */,
-				5ECD1B311D63180D00C301DF /* MovieWatchedVC.swift */,
-				5E00826A1D55F9A6009DED1E /* WatchlistViewController.swift */,
-				5E00826B1D55F9A6009DED1E /* What2WatchViewController.swift */,
-				5ECD1B2F1D63033600C301DF /* SliderCollectionViewCell.swift */,
+				5E0082691D55F9A6009DED1E /* MySlideMenuController.swift */,
+				5EAAB95B1D780512009199A5 /* Menu Page */,
+				5EAAB95A1D7804F2009199A5 /* My Profile  */,
+				5E00826B1D55F9A6009DED1E /* HelpVC.swift */,
 				DA012F881D6401E300ADBF02 /* MovieDescriptionViewController.swift */,
-				5ECD1B331D631DFA00C301DF /* MovieListTableViewCell.swift */,
 			);
 			name = "New Screen";
 			sourceTree = "<group>";
@@ -454,11 +474,10 @@
 			children = (
 				5EAD89461D6864B80058AC3E /* main.swift */,
 				DA21C4281D39409400E6843E /* AppDelegate.swift */,
+				DA21C4741D39460A00E6843E /* Login/Signup */,
 				DA21C42A1D39409400E6843E /* MainScreenViewController.swift */,
-				5E0082691D55F9A6009DED1E /* MySlideMenuController.swift */,
 				5ECD0FFA1D66D59700EC54A8 /* Movie Swiping */,
 				5ECD1B171D62EC4F00C301DF /* New Screen */,
-				DA21C4741D39460A00E6843E /* Login/Signup */,
 				DA21C4751D39462E00E6843E /* Helper & Utilities */,
 				DA21C4711D3945DE00E6843E /* MBProgressHUD-master */,
 				DA21C47B1D3950D100E6843E /* Storyboards & List Files */,
@@ -1001,6 +1020,7 @@
 				5E00826D1D55F9A6009DED1E /* WatchlistViewController.swift in Sources */,
 				5ECD1B191D62EDE900C301DF /* MyProfileViewController.swift in Sources */,
 				5ECD1B341D631DFA00C301DF /* MovieListTableViewCell.swift in Sources */,
+				5EAAB95D1D78053E009199A5 /* RecomendationVC.swift in Sources */,
 				DAA481DD1D4A94E600CD962B /* NameViewController.swift in Sources */,
 				DA21C42B1D39409400E6843E /* MainScreenViewController.swift in Sources */,
 				5ECD10111D672CB900EC54A8 /* CustomOverlayView.swift in Sources */,
@@ -1008,7 +1028,7 @@
 				5ECD1B301D63033600C301DF /* SliderCollectionViewCell.swift in Sources */,
 				DA21C46C1D3945C000E6843E /* AppState.swift in Sources */,
 				DAA481CA1D4A6BF400CD962B /* TutorialViewController.swift in Sources */,
-				5E00826E1D55F9A6009DED1E /* What2WatchViewController.swift in Sources */,
+				5E00826E1D55F9A6009DED1E /* HelpVC.swift in Sources */,
 				DA21C46E1D3945C000E6843E /* AEXML.swift in Sources */,
 				DAA481CF1D4A6CF900CD962B /* SignUpViewController.swift in Sources */,
 				DA21C46D1D3945C000E6843E /* Extensions.swift in Sources */,

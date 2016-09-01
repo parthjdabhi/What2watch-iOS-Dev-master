@@ -101,13 +101,14 @@ class TermsViewController: BaseViewController, UIPageViewControllerDelegate {
                     self.ref.child("users").child(user!.uid).child("image").setValue(userPicture)
                     CommonUtils.sharedUtils.hideProgress()
                     
-                    let RevealViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as! SWRevealViewController
-                    self.navigationController?.pushViewController(RevealViewController, animated: true)
-                    
-                    //self.performSegueWithIdentifier("segueMainScreen", sender: self)
+                    self.performSegueWithIdentifier("segueMainScreen", sender: self)
                     
                     //let mainViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainScreenViewController") as! MainScreenViewController!
                     //self.navigationController?.pushViewController(mainViewController, animated: true)
+                    
+                    //let RevealViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as! SWRevealViewController
+                    //self.navigationController?.pushViewController(RevealViewController, animated: true)
+                    
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {() -> Void in
                         CommonUtils.sharedUtils.hideProgress()

@@ -206,11 +206,10 @@ class MySlideMenuController : UIViewController {
 //                    // Not found any movie
 //                    self.lblCount?.hidden = true
 //                }
-//                
-//                }, withCancelBlock: { error in
-//                    print(error.description)
-//                    MBProgressHUD.hideHUDForView(self.view, animated: true)
-//                    self.lblCount?.hidden = true
+//            }, withCancelBlock: { error in
+//                print(error.description)
+//                MBProgressHUD.hideHUDForView(self.view, animated: true)
+//                self.lblCount?.hidden = true
 //            })
 //    }
     
@@ -237,15 +236,15 @@ class MySlideMenuController : UIViewController {
     }
     
     @IBAction func actionImproveAccuracy(sender: AnyObject) {
-        self.performSegueWithIdentifier("segueWatchlist", sender: self)
+        //self.performSegueWithIdentifier("segueWatchlist", sender: self)
     }
     
     @IBAction func actionShareWhat2Watch(sender: AnyObject) {
-        self.performSegueWithIdentifier("segueWhat2Watch", sender: self)
+        //self.performSegueWithIdentifier("segueWhat2Watch", sender: self)
     }
     
     @IBAction func actionHelp(sender: AnyObject) {
-        self.performSegueWithIdentifier("segueWatchlist", sender: self)
+        //self.performSegueWithIdentifier("segueWatchlist", sender: self)
     }
 }
 

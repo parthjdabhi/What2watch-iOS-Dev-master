@@ -1,15 +1,15 @@
 //
-//  What2WatchViewController.swift
+//  HelpVC.swift
 //  What2Watch
 //
-//  Created by iParth on 8/3/16.
+//  Created by iParth on 9/1/16.
 //  Copyright © 2016 Harloch. All rights reserved.
 //
 
 import UIKit
 import SWRevealViewController
 
-class What2WatchViewController: UIViewController {
+class HelpVC: UIViewController {
 
     @IBOutlet var btnMenu: UIButton?
     
